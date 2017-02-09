@@ -39,7 +39,11 @@
 *.dvi
 *.ps
 
+auto
+
 ############################################
 # do not upload secret infomation
 myresume.tex
 myresume.pdf
+mycoverletter.tex
+mycoverletter.pdf
