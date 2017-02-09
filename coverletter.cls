@@ -1,9 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{resume}[2015/05/25 An elegant Résumé class]
-\LoadClass[11pt]{article}
+\ProvidesClass{coverletter}[2015/05/25 An elegant cover letter class]
+\LoadClass[11pt]{letter}
 
 % disable indent globally
-\setlength{\parindent}{0pt}
+% \setlength{\parindent}{0pt}
 % some general improvements, defines the XeTeX logo
 \RequirePackage{xltxtra}
 % use xifthen
@@ -18,6 +18,8 @@
 %\RequirePackage[usenames,dvipsnames]{xcolor}
 % loading fonts
 \RequirePackage{fontspec}
+% Graphical signature
+\RequirePackage{graphicx}
 % Main document font
 % \setmainfont{Merriweather Sans}
 \setmainfont{Rosario}
@@ -25,14 +27,13 @@
 
 \RequirePackage[
 	a4paper,
-	left=0.8in,
-	right=0.8in,
+%	left=0.8in,
+%	right=0.8in,
 	top=0.70in,
 	bottom=0.55in,
 	nohead
 ]{geometry}
 
-\RequirePackage{titlesec}
 \RequirePackage{enumitem}
 \setlist{noitemsep} % removes spacing from items but leaves space around the whole list
 %\setlist{nosep} % removes all vertical spacing within and around the list
@@ -40,31 +41,21 @@
 \setlist[enumerate]{topsep=0.25em, leftmargin=1.5pc}
 \RequirePackage[super]{nth}
 
-\titleformat{\section}         % Customise the \section command 
-  {\Large\scshape\raggedright} % Make the \section headers large (\Large),
-                               % small capitals (\scshape) and left aligned (\raggedright)
-  {}{0em}                      % Can be used to give a prefix to all sections, like 'Section ...'
-  {}                           % Can be used to insert code before the heading
-  [\titlerule]                 % Inserts a horizontal line after the heading
-\titlespacing*{\section}{0cm}{*1.8}{*1.8}
+% Remove excess space in signature
+% https://texblog.org/2010/05/04/latex-letter-signature-as-image/
+\renewcommand{\closing}[1]{\par\nobreak\vspace{\parskip}%
+\stopbreaks
+\noindent
+\ifx\@empty\fromaddress\else
+\hspace*{\longindentation}\fi
+\parbox{\indentedwidth}{\raggedright
+    \ignorespaces #1\\[0.0in]%
+    \ifx\@empty\fromsig
+        \fromname
+\else \fromsig \fi\strut}%
+\par}
 
-\titleformat{\subsection}
-  {\large\raggedright}
-  {}{0em}
-  {}
-\titlespacing*{\subsection}{0cm}{*1.8}{*0.6}
-
-\newcommand{\datedsection}[2]{%
-  \section[#1]{#1 \hfill #2}%
-}
-\newcommand{\datedsubsection}[3]{%
-  \subsection[#1]{#1 $\circ$ #2 \hfill #3}%
-}
-\newcommand{\datedline}[2]{%
-  {\par #1 \hfill #2 \par}%
-}
-
-\newcommand{\name}[1]{
+\newcommand{\headername}[1]{
   \centerline{\Huge\scshape{#1}}
   \vspace{1.25ex}
 }
