@@ -28,7 +28,7 @@
 	left=0.8in,
 	right=0.8in,
 	top=0.70in,
-	bottom=0.55in,
+	bottom=0.70in,
 	nohead
 ]{geometry}
 
@@ -105,6 +105,11 @@
   \vspace{0.25em}
   \centerline{\sffamily\large{#2}}
   \vspace{1.5ex}
+}
+
+\newcommand{\statement}[1]{
+  #1
+  \vspace{1.8ex}
 }
 
 \newcommand{\role}[2]{
